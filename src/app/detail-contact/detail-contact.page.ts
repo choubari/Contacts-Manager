@@ -1,3 +1,4 @@
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { Component, OnInit } from '@angular/core';
 import { Contact } from '../models/Contact';
 import { ContactAcessService } from '../services/contact-acess.service';
@@ -156,11 +157,33 @@ export class DetailContactPage implements OnInit {
   }
 
   email() {
+    /*
+    this.emailComposer.isAvailable().then(
+      () => {
+        // eslint-disable-next-line prefer-const
+        let email = {
+          to: '',
+          cc: '',
+          bcc: [''],
+          subject: 'Cordova Icons',
+          body: 'How are you? Nice greetings from Leipzig',
+          isHtml: false,
+        };
+        this.emailComposer.addAlias('gmail', 'com.google.android.gm');
+        this.emailComposer.open(email);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    */
     const email = {
       to: this.contact.email,
-      subject: '[Rediger votre objet]]’, body: [Rediger votre message]',
+      subject: '[Rediger votre objet]',
+      body: '[Rediger votre message]',
       isHtml: true,
     };
+    this.emailComposer.addAlias('gmail', 'com.google.android.gm');
     this.emailComposer.open(email);
   }
 
