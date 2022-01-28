@@ -184,7 +184,10 @@ export class DetailContactPage implements OnInit {
       isHtml: true,
     };
     this.emailComposer.addAlias('gmail', 'com.google.android.gm');
-    this.emailComposer.open(email);
+    this.emailComposer
+      .open(email)
+      .then((res) => console.log('Launched Email!', res))
+      .catch((err) => console.log('Error launching Email', err));
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -201,14 +204,19 @@ export class DetailContactPage implements OnInit {
     return '';
   }
 
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  SMS() {
-    this.sms.send(this.contact.tel, '[Votre message ici!!!]');
+  sendSMS() {
+    this.sms.send(this.contact.tel, '[Votre message ici!!!]', {
+      replaceLineBreaks: false, // true to replace \n by a new line, false by default
+      android: {
+        intent: 'INTENT', // send SMS with the native android SMS messaging
+        //intent: '' // send SMS without opening any other app
+      },
+    });
   }
 
   sharing() {
     this.socialSharing
-      .shareViaWhatsAppToPhone(this.contact.tel, this.GPS(), null)
+      .shareViaWhatsAppToPhone(this.contact.tel, 'this.GPS()', null)
       .then(() => {
         // Success!
       })
