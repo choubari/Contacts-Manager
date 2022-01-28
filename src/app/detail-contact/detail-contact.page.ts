@@ -179,11 +179,13 @@ export class DetailContactPage implements OnInit {
     */
     const email = {
       to: this.contact.email,
+      cc: '',
+      bcc: [''],
       subject: '[Rediger votre objet]',
       body: '[Rediger votre message]',
       isHtml: true,
     };
-    this.emailComposer.addAlias('gmail', 'com.google.android.gm');
+    //this.emailComposer.addAlias('gmail', 'com.google.android.gm');
     this.emailComposer
       .open(email)
       .then((res) => console.log('Launched Email!', res))
@@ -216,7 +218,7 @@ export class DetailContactPage implements OnInit {
 
   sharing() {
     this.socialSharing
-      .shareViaWhatsAppToPhone(this.contact.tel, 'test from ionic', null)
+      .shareViaWhatsAppToPhone(this.contact.tel, this.GPS(), null)
       .then(() => {
         // Success!
       })
