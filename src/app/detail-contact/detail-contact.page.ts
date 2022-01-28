@@ -216,7 +216,7 @@ export class DetailContactPage implements OnInit {
 
   sharing() {
     this.socialSharing
-      .shareViaWhatsAppToPhone(this.contact.tel, 'this.GPS()', null)
+      .shareViaWhatsAppToPhone(this.contact.tel, 'test from ionic', null)
       .then(() => {
         // Success!
       })

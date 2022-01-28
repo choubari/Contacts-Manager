@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~13.0.0",
     "@angular/platform-browser-dynamic": "~13.0.0",
     "@angular/router": "~13.0.0",
+    "@awesome-cordova-plugins/android-permissions": "^5.38.0",
     "@capacitor/app": "1.0.7",
     "@capacitor/core": "3.3.3",
     "@capacitor/haptics": "1.1.3",
@@ -60,6 +61,7 @@
     "call-number": "^1.0.1",
     "cordova-android": "^10.1.1",
     "cordova-browser": "^6.0.0",
+    "cordova-plugin-android-permissions": "^1.1.3",
     "cordova-plugin-androidx": "^3.0.0",
     "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-plugin-device": "^2.0.2",
@@ -107,7 +109,8 @@
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
       "cordova-plugin-ionic-keyboard": {},
-      "call-number": {}
+      "call-number": {},
+      "cordova-plugin-android-permissions": {}
     },
     "platforms": [
       "browser"
