@@ -7,28 +7,113 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
- <form [formGroup]= "inscriptionForm" (ngSubmit)="signUp()">
-  <ion-item>
-    <ion-label>Nom</ion-label>
-    <ion-input type="text" formControlName='nom'></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Prenom</ion-label>
-    <ion-input type="text" formControlName='prenom'></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Email</ion-label>
-    <ion-input type="email" formControlName='email'></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label>Tel</ion-label>
-    <ion-input type="Tel" formControlName='tel'></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label> Password</ion-label>
-    <ion-input type="Password" formControlName='password'></ion-input>
-  </ion-item>
-  <ion-button expand="block" fill="outline" type="submit">Envoyer</ion-button>
- </form>
-</ion-content>
+  <form [formGroup]="inscriptionForm" (ngSubmit)="signUp()">
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" formControlName="nom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prenom</ion-label>
+      <ion-input type="text" formControlName="prenom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tel</ion-label>
+      <ion-input type="Tel" formControlName="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label> Password</ion-label>
+      <ion-input type="Password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-button expand="block" fill="outline" type="submit">Envoyer</ion-button>
+  </form>
+  <ion-card *ngIf="!isImgUploading && !isImgUploaded">
+    <ion-card-header>
+      <ion-card-title>Select File</ion-card-title>
+    </ion-card-header>
 
+    <ion-button color="danger">
+      <input
+        type="file"
+        class="upload"
+        (change)="fileUpload($event.target.files)"
+      />
+    </ion-button>
+  </ion-card>
+
+  <ion-card *ngIf="isImgUploading && !isImgUploaded">
+    <ion-card-header>
+      <ion-card-title>Files selected: <b>{{ fileName }}</b></ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="progressNum | async as percentage">
+        Progress: {{ percentage | number }}%
+        <ion-progress-bar value="{{ percentage / 100 }}"></ion-progress-bar>
+      </div>
+      <div *ngIf="progressSnapshot | async as pSnapshot">
+        Image size: {{ pSnapshot.totalBytes | fileSize }} Transfered: {{
+        pSnapshot.bytesTransferred | fileSize }}
+        <div
+          *ngIf="progressSnapshot && pSnapshot.bytesTransferred !== pSnapshot.totalBytes"
+        >
+          <ion-button
+            color="danger"
+            fill="outline"
+            size="small"
+            (click)="ngFireUploadTask.cancel()"
+            >Cancel</ion-button
+          >
+          <ion-button
+            color="secondary"
+            fill="outline"
+            size="small"
+            (click)="ngFireUploadTask.pause()"
+            >Pause
+          </ion-button>
+          <ion-button
+            color="dark"
+            fill="outline"
+            size="small"
+            (click)="ngFireUploadTask.resume()"
+            class="button"
+            >Resume
+          </ion-button>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="!isImgUploading && isImgUploaded">
+    <ion-card-header>
+      <ion-card-title> <b>{{ fileName }}</b> Uploaded </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div *ngIf="fileUploadedPath | async as fileUrl">
+        <img [src]="fileUrl" />
+        <a [href]="fileUrl" rel="nofollow" target="_blank">Download</a>
+      </div>
+      File Size: {{ FileSize | fileSize }}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title> Uploaded Files Collection </ion-card-title>
+    </ion-card-header>
+    <ion-card *ngFor="let img of files | async">
+      <ion-card-header>
+        <ion-card-title> {{ img.name }} </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <img [src]="img.filepath" />
+        <a [href]="img.filepath" rel="nofollow" target="_blank">Download</a>
+      </ion-card-content>
+    </ion-card>
+  </ion-card>
+</ion-content>

@@ -17,9 +17,10 @@ import { EmailComposer } from '@ionic-native/email-composer/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { SMS } from '@ionic-native/sms/ngx';
 import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { FileSizePipe } from './file-size.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, FileSizePipe],
   entryComponents: [],
   imports: [
     BrowserModule,
