@@ -179,8 +179,6 @@ export class DetailContactPage implements OnInit {
     */
     const email = {
       to: this.contact.email,
-      cc: '',
-      bcc: [''],
       subject: '[Rediger votre objet]',
       body: '[Rediger votre message]',
       isHtml: true,
@@ -194,14 +192,27 @@ export class DetailContactPage implements OnInit {
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   GPS(): string {
+    /*
+    return (
+      'e ' +
+      this.geolocation
+        .getCurrentPosition()
+        .then(
+          (resp) =>
+            '(' + resp.coords.latitude + ',' + resp.coords.longitude + ')'
+        )
+        .catch((error) => '')
+    );
+    */
     this.geolocation
       .getCurrentPosition()
-      .then(
-        (resp) => '(' + resp.coords.latitude + ',' + resp.coords.longitude + ')'
-      )
+      .then((resp) => {
+        console.log('We are getting location', resp);
+        return '(' + resp.coords.latitude + ',' + resp.coords.longitude + ')';
+      })
       .catch((error) => {
         console.log('Error getting location', error);
-        return ' ';
+        return '';
       });
     return '';
   }
