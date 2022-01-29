@@ -7,29 +7,10 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
-  <form [formGroup]="inscriptionForm" (ngSubmit)="signUp()">
-    <ion-item>
-      <ion-label>Nom</ion-label>
-      <ion-input type="text" formControlName="nom"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Prenom</ion-label>
-      <ion-input type="text" formControlName="prenom"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Email</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Tel</ion-label>
-      <ion-input type="Tel" formControlName="tel"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label> Password</ion-label>
-      <ion-input type="Password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-button expand="block" fill="outline" type="submit">Envoyer</ion-button>
-  </form>
+  <ion-text color="dark">
+    <h4>Upload Profil Image :</h4>
+  </ion-text>
+
   <ion-card *ngIf="!isImgUploading && !isImgUploaded">
     <ion-card-header>
       <ion-card-title>Select File</ion-card-title>
@@ -116,4 +97,28 @@
       </ion-card-content>
     </ion-card>
   </ion-card>
+
+  <form [formGroup]="inscriptionForm" (ngSubmit)="signUp()">
+    <ion-item>
+      <ion-label>Nom</ion-label>
+      <ion-input type="text" formControlName="nom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prenom</ion-label>
+      <ion-input type="text" formControlName="prenom"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Tel</ion-label>
+      <ion-input type="Tel" formControlName="tel"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label> Password</ion-label>
+      <ion-input type="Password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-button expand="block" fill="outline" type="submit">Envoyer</ion-button>
+  </form>
 </ion-content>
