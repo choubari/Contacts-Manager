@@ -50,8 +50,8 @@ export class ListeContactsPage implements OnInit {
         ville: e.payload.doc.data().ville,
         adresse: e.payload.doc.data().adresse,
         service: e.payload.doc.data().service,
-        src: this.getImageByMail(e.payload.doc.data().email),
-        //src: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
+        //src: this.getImageByMail(e.payload.doc.data().email),
+        src: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
       }));
     });
   }
