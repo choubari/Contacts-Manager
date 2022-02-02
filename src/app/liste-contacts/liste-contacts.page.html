@@ -15,12 +15,14 @@
       <ion-thumbnail slot="start">
         <ion-img [src]="item.src"></ion-img>
       </ion-thumbnail>
-      <ion-label>{{item.nom}} {{item.prenom}}</ion-label>
-      <ion-label><br />{{item.service}}</ion-label>
+      <ion-label class="fixedLabel">{{item.nom}} {{item.prenom}}</ion-label>
+      <ion-label color="secondary" class="ion-text-right"
+        ><br />{{item.service}}</ion-label
+      >
     </ion-item>
   </ion-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="ajouterContact()">
+    <ion-fab-button (click)="ajouterContact()" color="secondary">
       <ion-icon name="add-circle-outline" end right></ion-icon>
     </ion-fab-button>
   </ion-fab>

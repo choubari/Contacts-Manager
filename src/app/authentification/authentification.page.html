@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -9,18 +8,31 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="authForm" (ngSubmit)="singIn()">
-  <ion-item>
-    <ion-label>Email</ion-label>
-    <ion-input type="text" formControlName="email"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label> Password</ion-label>
-    <ion-input type="Password" formControlName="password"></ion-input>
-  </ion-item>
-  <ion-button expand="block" fill="outline" type="submit">SingIn</ion-button>
+  <img
+    src="assets/logo_ionic.png"
+    style="width: 115px; display: block; margin: 0 auto"
+  />
+  <ion-row style="height: 20px"></ion-row>
+  <form [formGroup]="authForm" (ngSubmit)="singIn()" style="margin: 10px">
+    <ion-item class="box">
+      <ion-label color="primary">Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-item class="box">
+      <ion-label color="primary"> Password</ion-label>
+      <ion-input type="Password" formControlName="password"></ion-input>
+    </ion-item>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-button expand="block" color="secondary" type="submit"
+      >SingIn</ion-button
+    >
   </form>
-  <ion-button expand="block" fill="outline" (click)="singUp()">SingUp</ion-button>
+  <ion-button
+    expand="block"
+    fill="outline"
+    (click)="singUp()"
+    style="margin: 10px"
+    >SingUp</ion-button
+  >
 </ion-content>
-
-

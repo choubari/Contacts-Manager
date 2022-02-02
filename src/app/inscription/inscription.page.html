@@ -7,6 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
+  <!--
   <ion-text color="dark">
     <h4>Upload Profil Image :</h4>
   </ion-text>
@@ -97,28 +98,44 @@
       </ion-card-content>
     </ion-card>
   </ion-card>
-
-  <form [formGroup]="inscriptionForm" (ngSubmit)="signUp()">
-    <ion-item>
-      <ion-label>Nom</ion-label>
+  -->
+  <form
+    [formGroup]="inscriptionForm"
+    (ngSubmit)="signUp()"
+    style="margin: 10px"
+  >
+    <img
+      src="assets/images/smartphone.png"
+      style="width: 115px; display: block; margin: 0 auto"
+    />
+    <ion-row style="height: 10px"></ion-row>
+    <ion-item class="box">
+      <ion-label color="primary">Nom</ion-label>
       <ion-input type="text" formControlName="nom"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Prenom</ion-label>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-item class="box">
+      <ion-label color="primary">Prenom</ion-label>
       <ion-input type="text" formControlName="prenom"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Email</ion-label>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-item class="box">
+      <ion-label color="primary">Email</ion-label>
       <ion-input type="email" formControlName="email"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label>Tel</ion-label>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-item class="box">
+      <ion-label color="primary">Tel</ion-label>
       <ion-input type="Tel" formControlName="tel"></ion-input>
     </ion-item>
-    <ion-item>
-      <ion-label> Password</ion-label>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-item class="box">
+      <ion-label color="primary"> Password</ion-label>
       <ion-input type="Password" formControlName="password"></ion-input>
     </ion-item>
-    <ion-button expand="block" fill="outline" type="submit">Envoyer</ion-button>
+    <ion-row style="height: 15px"></ion-row>
+    <ion-button expand="block" color="secondary" type="submit"
+      >Submit</ion-button
+    >
   </form>
 </ion-content>

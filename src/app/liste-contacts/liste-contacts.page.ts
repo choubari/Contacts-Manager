@@ -51,6 +51,7 @@ export class ListeContactsPage implements OnInit {
         adresse: e.payload.doc.data().adresse,
         service: e.payload.doc.data().service,
         src: this.getImageByMail(e.payload.doc.data().email),
+        //src: 'https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png',
       }));
     });
   }
@@ -59,6 +60,7 @@ export class ListeContactsPage implements OnInit {
     const imageRef = this.angularFireStorage.ref(fileStoragePath);
     console.log('img ', imageRef.getDownloadURL());
     return imageRef.getDownloadURL();
+    //return 'https://firebasestorage.googleapis.com/v0/b/contactsmanager-17e96.appspot.com/o/Compte%2Fchoubari%40gmail.com%2FprofileImage';
   }
   detailsContact(email) {
     const navigationExtras: NavigationExtras = {

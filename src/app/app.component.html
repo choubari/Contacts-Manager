@@ -3,11 +3,16 @@
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-item *ngIf="fileUploadedPath | async as fileUrl">
-          <ion-img style="width: 80px; height: 80px" [src]="fileUrl"></ion-img>
+          <ion-img
+            style="width: 100px; height: 100px; object-fit: cover"
+            [src]="fileUrl"
+          ></ion-img>
         </ion-item>
         <ion-list id="inbox-list">
           <ion-list-header>Inbox</ion-list-header>
-          <ion-note>{{ email }}</ion-note>
+          <ion-note>
+            <ion-label color="secondary">{{ email }}</ion-label>
+          </ion-note>
 
           <ion-menu-toggle
             auto-hide="false"
@@ -24,8 +29,9 @@
                 slot="start"
                 [ios]="p.icon + '-outline'"
                 [md]="p.icon + '-sharp'"
+                color="secondary"
               ></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label color="primary">{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>

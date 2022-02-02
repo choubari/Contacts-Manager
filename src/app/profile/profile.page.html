@@ -8,7 +8,16 @@
 </ion-header>
 <ion-content class="ion-padding" *ngIf="compte">
   <ion-item *ngIf="fileUploadedPath | async as fileUrl">
-    <ion-img style="width: 200px; height: 200px" [src]="fileUrl"></ion-img>
+    <ion-img
+      style="
+        width: 170px;
+        height: 170px;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto;
+      "
+      [src]="fileUrl"
+    ></ion-img>
   </ion-item>
   <ion-item>
     <input
