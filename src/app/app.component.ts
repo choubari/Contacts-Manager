@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactAuthService } from './services/contact-auth.service';
 import { NavController } from '@ionic/angular';
-
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -10,6 +14,7 @@ import { NavController } from '@ionic/angular';
 })
 export class AppComponent implements OnInit {
   email: string;
+  fileUploadedPath: Observable<string>;
   public appPages = [
     { title: 'Mes contacts', url: '/liste-contacts', icon: 'person' },
     {
@@ -23,7 +28,8 @@ export class AppComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private fireauth: ContactAuthService,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    private angularFireStorage: AngularFireStorage
   ) {
     /*
     this.test = 'test@gmail.Com';
@@ -39,6 +45,10 @@ export class AppComponent implements OnInit {
         if (res !== null) {
           this.email = res.email;
           console.log('email: ', this.email);
+          const fileStoragePath = `Compte/${this.email}/profileImage`;
+          const imageRef = this.angularFireStorage.ref(fileStoragePath);
+          this.fileUploadedPath = imageRef.getDownloadURL();
+          console.log('image ', this.fileUploadedPath);
         } else {
           this.navCtrl.navigateForward('/authentification');
         }

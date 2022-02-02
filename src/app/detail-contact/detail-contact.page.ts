@@ -16,6 +16,16 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
+import { Observable } from 'rxjs';
+import { finalize, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-detail-contact',
@@ -29,6 +39,9 @@ export class DetailContactPage implements OnInit {
   isButtonsVisible = false;
   modified: boolean;
   inscriptionForm: FormGroup;
+  ngFireUploadTask: AngularFireUploadTask;
+  progressSnapshot: Observable<any>;
+  fileUploadedPath: Observable<string>;
 
   constructor(
     private contactservice: ContactAcessService,
@@ -42,6 +55,7 @@ export class DetailContactPage implements OnInit {
     private router: Router,
     private sms: SMS,
     private socialSharing: SocialSharing,
+    private angularFireStorage: AngularFireStorage,
     private formBuilder: FormBuilder
   ) {
     this.route.queryParams.subscribe((params) => {
@@ -62,6 +76,9 @@ export class DetailContactPage implements OnInit {
       this.personel();
       this.modified = true;
     }
+    const fileStoragePath = `Contact/${this.emailContact}/profileImage`;
+    const imageRef = this.angularFireStorage.ref(fileStoragePath);
+    this.fileUploadedPath = imageRef.getDownloadURL();
   }
 
   personel() {
@@ -157,26 +174,6 @@ export class DetailContactPage implements OnInit {
   }
 
   email() {
-    /*
-    this.emailComposer.isAvailable().then(
-      () => {
-        // eslint-disable-next-line prefer-const
-        let email = {
-          to: '',
-          cc: '',
-          bcc: [''],
-          subject: 'Cordova Icons',
-          body: 'How are you? Nice greetings from Leipzig',
-          isHtml: false,
-        };
-        this.emailComposer.addAlias('gmail', 'com.google.android.gm');
-        this.emailComposer.open(email);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    */
     const email = {
       to: this.contact.email,
       subject: '[Rediger votre objet]',
@@ -236,6 +233,25 @@ export class DetailContactPage implements OnInit {
       .catch(() => {
         // Error!
       });
+  }
+
+  fileUpload(event: FileList) {
+    const file = event.item(0);
+    if (file.type.split('/')[0] !== 'image') {
+      console.log('File type is not supported!');
+      return;
+    }
+    const fileStoragePath = `Contact/${this.emailContact}/profileImage`;
+    const imageRef = this.angularFireStorage.ref(fileStoragePath);
+    this.ngFireUploadTask = this.angularFireStorage.upload(
+      fileStoragePath,
+      file
+    );
+    this.progressSnapshot = this.ngFireUploadTask.snapshotChanges().pipe(
+      finalize(() => {
+        this.fileUploadedPath = imageRef.getDownloadURL();
+      })
+    );
   }
 
   save() {

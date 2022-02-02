@@ -4,6 +4,10 @@ import { Contact } from '../models/Contact';
 import { NavigationExtras } from '@angular/router';
 import { ContactAcessService } from '../services/contact-acess.service';
 import { ContactAuthService } from '../services/contact-auth.service';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-liste-contacts',
@@ -18,7 +22,8 @@ export class ListeContactsPage implements OnInit {
     private menuCtrl: MenuController,
     private navCtrl: NavController,
     private firestore: ContactAcessService,
-    private fireAuth: ContactAuthService
+    private fireAuth: ContactAuthService,
+    private angularFireStorage: AngularFireStorage
   ) {
     this.menuCtrl.enable(true);
   }
@@ -45,8 +50,15 @@ export class ListeContactsPage implements OnInit {
         ville: e.payload.doc.data().ville,
         adresse: e.payload.doc.data().adresse,
         service: e.payload.doc.data().service,
+        src: this.getImageByMail(e.payload.doc.data().email),
       }));
     });
+  }
+  getImageByMail(email) {
+    const fileStoragePath = `Contact/${email}/profileImage`;
+    const imageRef = this.angularFireStorage.ref(fileStoragePath);
+    console.log('img ', imageRef.getDownloadURL());
+    return imageRef.getDownloadURL();
   }
   detailsContact(email) {
     const navigationExtras: NavigationExtras = {

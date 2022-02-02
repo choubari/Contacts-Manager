@@ -2,6 +2,9 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
+        <ion-item *ngIf="fileUploadedPath | async as fileUrl">
+          <ion-img style="width: 80px; height: 80px" [src]="fileUrl"></ion-img>
+        </ion-item>
         <ion-list id="inbox-list">
           <ion-list-header>Inbox</ion-list-header>
           <ion-note>{{ email }}</ion-note>

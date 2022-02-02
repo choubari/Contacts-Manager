@@ -13,8 +13,8 @@ import { ListeContactsPage } from './liste-contacts.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ListeContactsPageRoutingModule
+    ListeContactsPageRoutingModule,
   ],
-  declarations: [ListeContactsPage]
+  declarations: [ListeContactsPage],
 })
 export class ListeContactsPageModule {}

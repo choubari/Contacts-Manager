@@ -7,8 +7,15 @@
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding" *ngIf="compte">
+  <ion-item *ngIf="fileUploadedPath | async as fileUrl">
+    <ion-img style="width: 200px; height: 200px" [src]="fileUrl"></ion-img>
+  </ion-item>
   <ion-item>
-    <ion-img [src]="image"></ion-img>
+    <input
+      type="file"
+      class="upload"
+      (change)="fileUpload($event.target.files)"
+    />
   </ion-item>
   <ion-item>
     <ion-label>Nom</ion-label>

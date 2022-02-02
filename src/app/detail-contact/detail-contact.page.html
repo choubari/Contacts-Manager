@@ -5,6 +5,16 @@
 </ion-header>
 
 <ion-content class="ion-padding" *ngIf="contact">
+  <ion-item *ngIf="fileUploadedPath | async as fileUrl">
+    <ion-img style="width: 200px; height: 200px" [src]="fileUrl"></ion-img>
+  </ion-item>
+  <ion-item>
+    <input
+      type="file"
+      class="upload"
+      (change)="fileUpload($event.target.files)"
+    />
+  </ion-item>
   <form (ngSubmit)="save()">
     <ion-fab horizontal="end" vertical="top" slot="fixed">
       <ion-fab-button>
